@@ -65,7 +65,7 @@ namespace LeaveManagementSystem.Web.Data.Migrations
                 keyColumn: "Id",
                 keyValue: "82da3d2b-b424-4c47-b2f4-8c324b42a696",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "6b8ab7d3-01b4-4100-bb99-71f233b1f1a7", "AQAAAAIAAYagAAAAEPotqCHs7/ym+TMy754B+/ewrqLHBRHZNMmgWUVGBN/r2oteStDRtOXcqWQSJRxoRw==", "e8fd82d1-200d-42a9-b9ca-eb474b38cd17" });
+                values: new object[] { "b3cb8535-489e-4a6c-b189-0ae25e888a76", "AQAAAAIAAYagAAAAENE8Fteexr1vDZRxGuGM3bAHvHFB7C9ydi8GWdOwC3ytk09vEyKCwkKlU7ZdTEuw4w==", "6c7e7a2e-0d4f-4460-8697-1df2a011d760" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_LeaveAllocations_EmployeeId",

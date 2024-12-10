@@ -32,7 +32,7 @@ public class LeaveTypesService(ApplicationDbContext _context, IMapper _mapper) :
         if (data != null)
         {
             _context.Remove(data);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 
@@ -66,5 +66,9 @@ public class LeaveTypesService(ApplicationDbContext _context, IMapper _mapper) :
             && q.Id != leaveTypeEdit.Id);
     }
 
-
+    public async Task<bool> DaysExceedMaximum(int leaveTypeId, int days)
+    {
+        var leaveType = await _context.LeaveTypes.FindAsync(leaveTypeId);
+        return leaveType.NumberOfDays < days;
+    }
 }

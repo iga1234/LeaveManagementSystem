@@ -102,7 +102,7 @@ namespace LeaveManagementSystem.Web.Data.Migrations
                         {
                             Id = "82da3d2b-b424-4c47-b2f4-8c324b42a696",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6b8ab7d3-01b4-4100-bb99-71f233b1f1a7",
+                            ConcurrencyStamp = "b3cb8535-489e-4a6c-b189-0ae25e888a76",
                             DateOfBirth = new DateOnly(1950, 12, 1),
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
@@ -111,9 +111,9 @@ namespace LeaveManagementSystem.Web.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPotqCHs7/ym+TMy754B+/ewrqLHBRHZNMmgWUVGBN/r2oteStDRtOXcqWQSJRxoRw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENE8Fteexr1vDZRxGuGM3bAHvHFB7C9ydi8GWdOwC3ytk09vEyKCwkKlU7ZdTEuw4w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e8fd82d1-200d-42a9-b9ca-eb474b38cd17",
+                            SecurityStamp = "6c7e7a2e-0d4f-4460-8697-1df2a011d760",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -161,6 +161,7 @@ namespace LeaveManagementSystem.Web.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<int>("NumberOfDays")
@@ -367,7 +368,7 @@ namespace LeaveManagementSystem.Web.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("LeaveManagementSystem.Web.Data.LeaveType", "LeaveType")
-                        .WithMany()
+                        .WithMany("LeaveAllocations")
                         .HasForeignKey("LeaveTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -434,6 +435,11 @@ namespace LeaveManagementSystem.Web.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LeaveManagementSystem.Web.Data.LeaveType", b =>
+                {
+                    b.Navigation("LeaveAllocations");
                 });
 #pragma warning restore 612, 618
         }

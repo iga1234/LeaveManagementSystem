@@ -18,7 +18,7 @@ public class EmailSender(IConfiguration _configuration) : IEmailSender
             IsBodyHtml = true
         };
 
-        message.To.Add(new MailAddress(fromAddress));
+        message.To.Add(new MailAddress(email));
 
         using var client = new SmtpClient(smtpServer, smtpPort);
         await client.SendMailAsync(message);

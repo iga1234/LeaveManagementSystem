@@ -1,12 +1,14 @@
 ﻿
 using LeaveManagementSystem.Web.Models.LeaveAllocations;
 
-namespace LeaveManagementSystem.Web.Services.LeaveAllocations
+namespace LeaveManagementSystem.Web.Services.LeaveAllocations;
+
+public interface ILeaveAllocationsService
 {
-    public interface ILeaveAllocationsService
-    {
-        Task AllocateLeave(string emploeeId);
-        Task<List<LeaveAllocation>> GetAllocations();
-        Task<EmployeeAllocationVM> GetEmployeeAllocations();
-    }
+    Task AllocateLeave(string employeeId);
+	Task EditAllocation(LeaveAllocationEditVM allocationEditVm);
+	Task<EmployeeAllocationVM> GetEmployeeAllocations(string? userId);
+	Task<LeaveAllocationEditVM> GetEmployeeAllocation(int allocationId);
+
+	Task<List<EmployeeListVM>> GetEmployees();
 }
