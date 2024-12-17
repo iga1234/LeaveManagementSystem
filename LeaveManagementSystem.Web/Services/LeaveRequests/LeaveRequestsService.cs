@@ -2,8 +2,8 @@
 
 namespace LeaveManagementSystem.Web.Services.LeaveRequests
 {
-    public class LeaveRequestsService : ILeaveRequestsService
-    {
+	public class LeaveRequestsService : ILeaveRequestsService
+	{
         public Task CancelLeaveRequest(int leaveRequestId)
         {
             throw new NotImplementedException();
@@ -28,5 +28,5 @@ namespace LeaveManagementSystem.Web.Services.LeaveRequests
         {
             throw new NotImplementedException();
         }
-    }
+	}
 }
