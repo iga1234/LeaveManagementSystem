@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using LeaveManagementSystem.Application.Models.LeaveTypes;
+using LeaveManagementSystem.Application.Services.LeaveTypes;
 using Microsoft.EntityFrameworkCore;
-using LeaveManagementSystem.Web.Data;
-using LeaveManagementSystem.Web.Models.LeaveTypes;
-using AutoMapper;
-using LeaveManagementSystem.Web.Services.LeaveTypes;
 
 
 namespace LeaveManagementSystem.Web.Controllers
 {
     [Authorize(Roles = Roles.Administrator)]
-    public class LeaveTypesController(ILeaveTypesService _leaveTypesService) : Controller
+    public class LeaveTypesController(ILeaveTypesService _leaveTypesService, ILogger<LeaveTypesController> _logger) : Controller
     {
         private const string NameExistsValidationMessage = "This leave type already exists in the database";
 
@@ -33,6 +25,7 @@ namespace LeaveManagementSystem.Web.Controllers
             //    Days = q.NumberOfDays,
             //});
 
+            _logger.LogInformation("Loading Leave Type");
             // convert the datamodel into a view model - Use AutoMapper
             var viewData = await _leaveTypesService.GetAllAsync();
 
@@ -77,7 +70,7 @@ namespace LeaveManagementSystem.Web.Controllers
             //{
             //    ModelState.AddModelError(nameof(leaveTypeCreate.Name), "Name should not contain vacation");
             //}
-            if(await _leaveTypesService.CheckIfLeaveTypeNameExists(leaveTypeCreate.Name))
+            if (await _leaveTypesService.CheckIfLeaveTypeNameExists(leaveTypeCreate.Name))
             {
                 ModelState.AddModelError(nameof(leaveTypeCreate.Name), NameExistsValidationMessage);
             }
@@ -87,6 +80,7 @@ namespace LeaveManagementSystem.Web.Controllers
                 await _leaveTypesService.Create(leaveTypeCreate);
                 return RedirectToAction(nameof(Index));
             }
+            _logger.LogWarning("Leave Type attempt failed due to invalidity");
             return View(leaveTypeCreate);
         }
 
